@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <div>
-        <h1>Firebase</h1>
+        <h1>My App</h1>
       </div>
     </>
   )
