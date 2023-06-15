@@ -20,22 +20,22 @@ function Navbar() {
           <nav className="navbarNav">
               <ul className="navbarListItems">
                   <li className="navbarListItem" onClick={() => navigate('/')}>
-                      <ExploreIcon fill={pathMatchRoute('/')?'#2c2c2c':'#8f8f8f'}
+                      <ExploreIcon fill={pathMatchRoute('/')?'#2c2c2c':''}
                         //   className="navbarIcon"
                           width='36px' height='36px' />
-                      <p className={pathMatchRoute('/')?'navbarListItemNameActive':'navbarListItemName'}>Explore</p>
+                      <p>Explore</p>
                   </li>
                   <li className="navbarListItem" onClick={()=>navigate('/offers')}>
-                      <OfferIcon fill={pathMatchRoute('/offers')?'#2c2c2c':'#8f8f8f'}
+                      <OfferIcon fill='#2c2c2c'
                         //   className="navbarIcon"
                           width='36px' height='36px' />
-                      <p className={pathMatchRoute('/offers')?'navbarListItemNameActive':'navbarListItemName'}>Offer</p>
+                      <p>Offer</p>
                   </li>
                   <li className="navbarListItem" onClick={()=>navigate('/profile')}>
-                      <PersonOutlineIcon fill={pathMatchRoute('/profile')?'#2c2c2c':'#8f8f8f'}
+                      <PersonOutlineIcon fill='#2c2c2c'
                         //   className="navbarIcon"
                           width='36px' height='36px' />
-                      <p className={pathMatchRoute('/profile')?'navbarListItemNameActive':'navbarListItemName'}>Profile</p>
+                      <p>Profile</p>
                   </li>
                   
               </ul>
