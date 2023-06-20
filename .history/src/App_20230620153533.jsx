@@ -6,8 +6,7 @@ import Offers from './pages/Offers'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import Navbar from './components/Navbar'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import {ToastContainer} from 'react-toastify'
 
 function App() {
 
