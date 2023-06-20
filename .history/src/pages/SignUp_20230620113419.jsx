@@ -45,8 +45,6 @@ function SignUp() {
       delete formDataCopy.password
       formDataCopy.timestamp= serverTimestamp()
       
-      await setDoc(doc(db,'users',user.uid), formDataCopy)
-      
       navigate('/')
       
       
