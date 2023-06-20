@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react'
 import { getAuth } from 'firebase/auth'
-import { useNavigate,Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 function Profile() {
@@ -14,7 +14,6 @@ function Profile() {
   
   const onLogout = () => {
     auth.signOut()
-    navigate('/') 
   }
   
   

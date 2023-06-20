@@ -14,7 +14,6 @@ function Profile() {
   
   const onLogout = () => {
     auth.signOut()
-    navigate('/') 
   }
   
   
