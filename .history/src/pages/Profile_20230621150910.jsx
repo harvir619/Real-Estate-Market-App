@@ -78,7 +78,7 @@ function Profile() {
             type='email'
             id='email'
             className={!changeDetails ? 'profileEmail' : 'profileEmailActive'}
-            disabled='true'
+            disabled={!changeDetails}
             value={email}
             onChange={onChange}
           />          

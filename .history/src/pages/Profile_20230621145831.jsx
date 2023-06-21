@@ -1,9 +1,8 @@
-import {useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import { getAuth,updateProfile } from 'firebase/auth'
 import { useNavigate, Link } from 'react-router-dom'
-import { updateDoc,doc } from 'firebase/firestore'
+import { updateDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
-import { toast } from 'react-toastify'
 
 
 function Profile() {
@@ -27,14 +26,9 @@ function Profile() {
       {
         //Update displayname in fb
         await updateProfile(auth.currentUser,{displayName:name})
-      }
-      
-      //Update in firestore
-      const userRef = doc(db,'users',auth.currentUser.uid)
-      await updateDoc(userRef,{name})
-      
+        }
     } catch (error) {
-      toast.error('Could not update profile')
+      
     }
   }
   const onChange = (e) => {
@@ -78,7 +72,7 @@ function Profile() {
             type='email'
             id='email'
             className={!changeDetails ? 'profileEmail' : 'profileEmailActive'}
-            disabled='true'
+            disabled={!changeDetails}
             value={email}
             onChange={onChange}
           />          

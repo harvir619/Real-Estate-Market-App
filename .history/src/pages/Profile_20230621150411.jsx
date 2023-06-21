@@ -30,7 +30,7 @@ function Profile() {
       }
       
       //Update in firestore
-      const userRef = doc(db,'users',auth.currentUser.uid)
+      const userRef = doc(db,'users'.auth.currentUser.uid)
       await updateDoc(userRef,{name})
       
     } catch (error) {
@@ -78,7 +78,7 @@ function Profile() {
             type='email'
             id='email'
             className={!changeDetails ? 'profileEmail' : 'profileEmailActive'}
-            disabled='true'
+            disabled={!changeDetails}
             value={email}
             onChange={onChange}
           />          

@@ -77,7 +77,7 @@ function Profile() {
           <input
             type='email'
             id='email'
-            className={!changeDetails ? 'profileEmail' : 'profileEmailActive'}
+            className='profileEmail'
             disabled='true'
             value={email}
             onChange={onChange}

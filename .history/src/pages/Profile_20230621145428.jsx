@@ -1,9 +1,8 @@
-import {useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import { getAuth,updateProfile } from 'firebase/auth'
 import { useNavigate, Link } from 'react-router-dom'
-import { updateDoc,doc } from 'firebase/firestore'
+import { updateDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
-import { toast } from 'react-toastify'
 
 
 function Profile() {
@@ -21,21 +20,8 @@ function Profile() {
     navigate('/') 
   }
   
-  const onSubmit= async() => {
-    try {
-      if (auth.currentUser.displayName !== name)
-      {
-        //Update displayname in fb
-        await updateProfile(auth.currentUser,{displayName:name})
-      }
-      
-      //Update in firestore
-      const userRef = doc(db,'users',auth.currentUser.uid)
-      await updateDoc(userRef,{name})
-      
-    } catch (error) {
-      toast.error('Could not update profile')
-    }
+  const onSubmit=() => {
+    console.log(123)
   }
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -75,11 +61,11 @@ function Profile() {
             onChange={onChange}
           />
           <input
-            type='email'
-            id='email'
-            className={!changeDetails ? 'profileEmail' : 'profileEmailActive'}
-            disabled='true'
-            value={email}
+            type='text'
+            id='name'
+            className={!changeDetails ? 'profileName' : 'profileNameActive'}
+            disabled={!changeDetails}
+            value={name}
             onChange={onChange}
           />          
         </form>
