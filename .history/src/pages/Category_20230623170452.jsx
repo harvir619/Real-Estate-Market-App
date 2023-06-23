@@ -58,9 +58,8 @@ function Category() {
                     <main>
                         <ul className="categoryListings">
                             {listings.map(listing =>
-                                (
-                                    <ListingItem key={listing.id } listing={listing.data} id={listing.id} />
-                                )
+                                <ListingItem key={listing.id } listing={listing.data} id={listing.id} />
+                                (<h3 key={listing.id}>{listing.data.name}aa</h3>)
                             )}
                         </ul>
                     </main>

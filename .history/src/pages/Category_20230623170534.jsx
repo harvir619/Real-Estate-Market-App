@@ -60,6 +60,7 @@ function Category() {
                             {listings.map(listing =>
                                 (
                                     <ListingItem key={listing.id } listing={listing.data} id={listing.id} />
+                                    
                                 )
                             )}
                         </ul>
