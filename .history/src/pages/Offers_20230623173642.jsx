@@ -65,7 +65,7 @@ function Offers() {
                         </ul>
                     </main>
                 </>
-            ):<p>No Offers</p>}    
+            ):<p>No Listing for {params.categoryName}</p>}    
         </div>
   )
 }

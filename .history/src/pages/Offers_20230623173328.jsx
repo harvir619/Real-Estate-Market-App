@@ -21,7 +21,7 @@ function Offers() {
                 
                 //Create a query
                 const q = query(listingsRef,
-                    where('offer', '==', true),
+                    where('type', '==', params.categoryName),
                     orderBy('timestamp', 'desc'),
                     limit(10))
                 
@@ -42,15 +42,15 @@ function Offers() {
         }
         fetchListings()
         
-    },[])
+    },[params.categoryName])
     
     return (
         <div className="category">
             
             <header>
-          <p className="pageHeader">
-            Offers
-          </p>
+                <p className="pageHeader">
+                    {params.categoryName === 'rent' ? 'Places for Rent' : 'Places for Sale'}
+                </p>
             </header>
             
             {loading ? <Spinner /> : listings && listings.length > 0 ? (
@@ -65,7 +65,7 @@ function Offers() {
                         </ul>
                     </main>
                 </>
-            ):<p>No Offers</p>}    
+            ):<p>No Listing for {params.categoryName}</p>}    
         </div>
   )
 }
