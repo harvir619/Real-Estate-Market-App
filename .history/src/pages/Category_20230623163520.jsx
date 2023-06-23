@@ -41,7 +41,7 @@ function Category() {
         }
         fetchListings()
         
-    },[params.categoryName])
+    },[])
     
     return (
         <div className="category">
@@ -57,7 +57,7 @@ function Category() {
                     <main>
                         <ul className="categoryListings">
                             {listings.map(listing =>
-                                (<h3 key={listing.id}>{listing.data.name}aa</h3>)
+                                (<h1>{listing.data.name}aa</h1>)
                             )}
                         </ul>
                     </main>

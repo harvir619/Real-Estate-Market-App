@@ -41,7 +41,7 @@ function Category() {
         }
         fetchListings()
         
-    },[params.categoryName])
+    },[])
     
     return (
         <div className="category">
@@ -52,16 +52,10 @@ function Category() {
                 </p>
             </header>
             
-            {loading ? <Spinner /> : listings && listings.length > 0 ? (
-                <>
-                    <main>
-                        <ul className="categoryListings">
-                            {listings.map(listing =>
-                                (<h3 key={listing.id}>{listing.data.name}aa</h3>)
-                            )}
-                        </ul>
-                    </main>
-                </>
+            {loading ? <Spinner /> : listings && listings.length>0?(
+                listings.map(listing => {
+                    <h1>{listing.data.name}aa</h1>
+                })
             ):<p>No Listing for {params.categoryName}</p>}    
         </div>
   )

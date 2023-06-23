@@ -41,27 +41,21 @@ function Category() {
         }
         fetchListings()
         
-    },[params.categoryName])
+    },[])
     
     return (
         <div className="category">
             
             <header>
                 <p className="pageHeader">
-                    {params.categoryName === 'rent' ? 'Places for Rent' : 'Places for Sale'}
+                    {params.categoryName === 'rent' ? 'Places for rent' : 'Places for sale'}
                 </p>
             </header>
             
-            {loading ? <Spinner /> : listings && listings.length > 0 ? (
-                <>
-                    <main>
-                        <ul className="categoryListings">
-                            {listings.map(listing =>
-                                (<h3 key={listing.id}>{listing.data.name}aa</h3>)
-                            )}
-                        </ul>
-                    </main>
-                </>
+            {loading ? <Spinner /> : listings && listings.length>0?(
+                listings.forEach(listing => {
+                    <h1>{listing.data.name}</h1>
+                })
             ):<p>No Listing for {params.categoryName}</p>}    
         </div>
   )
