@@ -14,13 +14,9 @@ function ForgotPassword() {
   const onSubmit = async (e) => {
     e.preventDefault()
     
-    try {
-      const auth = getAuth()
-      await sendPasswordResetEmail(auth, email)
-      toast.success('Email has been sent!')
-    } catch (error) {
-      toast.error('Could not sent reset email')
-    }
+    const auth = getAuth()
+    const user = auth.currentUser
+    sendPasswordResetEmail(user,email)
     
   }
   
@@ -43,7 +39,7 @@ function ForgotPassword() {
           <div className="signInBar">
             <div className="signInText">Send Reset Link</div>
               <button className="signInButton">
-               <ArrowRightIcon fill='#ffffff' width='34px' height='34px' /> 
+                
               </button>
           </div>
           
