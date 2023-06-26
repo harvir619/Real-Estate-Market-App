@@ -68,7 +68,9 @@ function CreateListing() {
             return
         }
         
-        let geolocation = {lattitude, longitude}
+        let geolocation = {
+            lattitude, longitude
+        }
         let location
         
         if (geolocationEnabled) {

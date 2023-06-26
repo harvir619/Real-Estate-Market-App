@@ -68,7 +68,9 @@ function CreateListing() {
             return
         }
         
-        let geolocation = {lattitude, longitude}
+        let geolocation = {
+            lattitude, longitude
+        }
         let location
         
         if (geolocationEnabled) {
@@ -82,12 +84,6 @@ function CreateListing() {
             
             location = data.status =='ZERO_RESULTS'?undefined:data.results[0]?.formatted_address
             
-            if(location === undefined|| location.includes('undefined')) {
-                setLoading(false)
-                toast.error('Please enter a correct address')
-                return
-            }
-            
         } else {
             geolocation.lat = lattitude
             geolocation.lng = longitude
@@ -99,10 +95,15 @@ function CreateListing() {
     }
     
     const onMutate = (e) => {
+        console.log(e.target.value)
         let boolean = null
         
-        if (e.target.value === 'true') {boolean=true}
-        else if (e.target.value === 'false') {boolean=false}
+        if (e.target.value === 'true') {
+            boolean=true
+        }
+        else if (e.target.value === 'false') {
+            boolean=false
+        }
         
         //Files
         if (e.target.files) {

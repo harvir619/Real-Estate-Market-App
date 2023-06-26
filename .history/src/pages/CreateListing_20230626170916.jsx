@@ -68,7 +68,9 @@ function CreateListing() {
             return
         }
         
-        let geolocation = {lattitude, longitude}
+        let geolocation = {
+            lattitude, longitude
+        }
         let location
         
         if (geolocationEnabled) {
@@ -99,10 +101,15 @@ function CreateListing() {
     }
     
     const onMutate = (e) => {
+        console.log(e.target.value)
         let boolean = null
         
-        if (e.target.value === 'true') {boolean=true}
-        else if (e.target.value === 'false') {boolean=false}
+        if (e.target.value === 'true') {
+            boolean=true
+        }
+        else if (e.target.value === 'false') {
+            boolean=false
+        }
         
         //Files
         if (e.target.files) {
