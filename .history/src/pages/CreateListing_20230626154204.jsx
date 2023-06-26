@@ -56,13 +56,12 @@ function CreateListing() {
     }
     
     const onMutate = (e) => {
-        console.log(e.target.value)
         let boolean = null
         
         if (e.target.value === 'true') {
             boolean=true
         }
-        else if (e.target.value === 'false') {
+        if (e.target.value === 'false') {
             boolean=false
         }
         
@@ -73,7 +72,7 @@ function CreateListing() {
             }))
         }
         //Text/Booleans/Numbers
-        else if (!e.target.files) {
+        if (!e.target.files) {
             setFormData((prevState) => ({
                 ...prevState,
                 [e.target.id]: boolean ?? e.target.value

@@ -55,8 +55,7 @@ function CreateListing() {
         e.preventDefault()
     }
     
-    const onMutate = (e) => {
-        console.log(e.target.value)
+    const onMutate = () => {
         let boolean = null
         
         if (e.target.value === 'true') {

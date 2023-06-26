@@ -8,7 +8,7 @@ function CreateListing() {
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
         type: 'rent',
-        name: '',
+        name: 'rent',
         bedrooms: 1,
         bathrooms: 1,
         parking: false,
@@ -55,8 +55,7 @@ function CreateListing() {
         e.preventDefault()
     }
     
-    const onMutate = (e) => {
-        console.log(e.target.value)
+    const onMutate = () => {
         let boolean = null
         
         if (e.target.value === 'true') {
@@ -76,7 +75,7 @@ function CreateListing() {
         else if (!e.target.files) {
             setFormData((prevState) => ({
                 ...prevState,
-                [e.target.id]: boolean ?? e.target.value
+                [e.target.id]: boolean ??
             }))
         }
     }

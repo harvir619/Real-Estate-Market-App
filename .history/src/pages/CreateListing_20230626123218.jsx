@@ -8,7 +8,7 @@ function CreateListing() {
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
         type: 'rent',
-        name: '',
+        name: 'rent',
         bedrooms: 1,
         bathrooms: 1,
         parking: false,
@@ -55,30 +55,8 @@ function CreateListing() {
         e.preventDefault()
     }
     
-    const onMutate = (e) => {
-        console.log(e.target.value)
-        let boolean = null
+    const onMutate = () => {
         
-        if (e.target.value === 'true') {
-            boolean=true
-        }
-        else if (e.target.value === 'false') {
-            boolean=false
-        }
-        
-        //Files
-        if (e.target.files) {
-            setFormData((prevState) => ({
-                ...prevState,images:e.target.files
-            }))
-        }
-        //Text/Booleans/Numbers
-        else if (!e.target.files) {
-            setFormData((prevState) => ({
-                ...prevState,
-                [e.target.id]: boolean ?? e.target.value
-            }))
-        }
     }
     
     return (
@@ -230,78 +208,6 @@ function CreateListing() {
                             </div>
                         </div>
                     )}
-                    <label className="formLabel">Offer</label>
-                    <div className="formButtons">
-                        <button
-                            className={offer ? 'formButtonActive' : 'formButton'}
-                            type='button'
-                            id='offer'
-                            value={true}
-                            onClick={onMutate}
-                        >
-                            Yes
-                        </button>
-                        <button
-                            className={
-                                !offer && offer !== null ? 'formButtonActive' : 'formButton'
-                            }
-                            type='button'
-                            id='offer'
-                            value={false}
-                            onClick={onMutate}
-                        >
-                            No
-                        </button>
-                    </div>
-                    <label className="formLabel">Regular Price</label>
-                    <div className="formPriceDiv">
-                        <input
-                            className="formInputSmall"
-                            type="number"
-                            id="regularPrice"
-                            value={regularPrice}
-                            onChange={onMutate}
-                            min='50'
-                            max='750000000'
-                            required
-                        />
-                        {type === 'rent' && <p className="formPriceText">$ / Month</p>}
-                    </div>
-                    {offer && (
-                        <>
-                            <label className="formLabel">Discounted Price</label>
-                            <input
-                                className="formInputSmall"
-                                type="number"
-                                id="discountedPrice"
-                                value={discountedPrice}
-                                onChange={onMutate}
-                                min='50'
-                                max='750000000'
-                                required
-                            />
-                        </>
-                    )}
-                    <label className="formLabel">Images</label>
-                    <p className="imagesInfo">
-                        The first image will be the cover (max 6).
-                    </p>
-                    <input
-                        className="formInputFile"
-                        type="file"
-                        id="images"
-                        onChange={onMutate}
-                        max='6'
-                        accept='.jpg,.png,.jpeg'
-                        multiple
-                        required
-                    /> 
-                    <button
-                        type='submit'
-                        className="primaryButton createListingButton"
-                    >
-                        Create Listing
-                    </button>
                 </form>
             </main>
             

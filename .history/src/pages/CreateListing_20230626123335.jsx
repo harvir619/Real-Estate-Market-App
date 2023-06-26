@@ -8,7 +8,7 @@ function CreateListing() {
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
         type: 'rent',
-        name: '',
+        name: 'rent',
         bedrooms: 1,
         bathrooms: 1,
         parking: false,
@@ -55,30 +55,8 @@ function CreateListing() {
         e.preventDefault()
     }
     
-    const onMutate = (e) => {
-        console.log(e.target.value)
-        let boolean = null
+    const onMutate = () => {
         
-        if (e.target.value === 'true') {
-            boolean=true
-        }
-        else if (e.target.value === 'false') {
-            boolean=false
-        }
-        
-        //Files
-        if (e.target.files) {
-            setFormData((prevState) => ({
-                ...prevState,images:e.target.files
-            }))
-        }
-        //Text/Booleans/Numbers
-        else if (!e.target.files) {
-            setFormData((prevState) => ({
-                ...prevState,
-                [e.target.id]: boolean ?? e.target.value
-            }))
-        }
     }
     
     return (
@@ -282,26 +260,6 @@ function CreateListing() {
                             />
                         </>
                     )}
-                    <label className="formLabel">Images</label>
-                    <p className="imagesInfo">
-                        The first image will be the cover (max 6).
-                    </p>
-                    <input
-                        className="formInputFile"
-                        type="file"
-                        id="images"
-                        onChange={onMutate}
-                        max='6'
-                        accept='.jpg,.png,.jpeg'
-                        multiple
-                        required
-                    /> 
-                    <button
-                        type='submit'
-                        className="primaryButton createListingButton"
-                    >
-                        Create Listing
-                    </button>
                 </form>
             </main>
             

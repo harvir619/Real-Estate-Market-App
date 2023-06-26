@@ -56,7 +56,6 @@ function CreateListing() {
     }
     
     const onMutate = (e) => {
-        console.log(e.target.value)
         let boolean = null
         
         if (e.target.value === 'true') {
