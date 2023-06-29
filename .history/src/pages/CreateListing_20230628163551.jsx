@@ -5,7 +5,6 @@ import Spinner from "../components/Spinner"
 import { toast } from "react-toastify"
 import {getStorage, ref, uploadBytesResumable, getDownloadURL} from 'firebase/storage'
 import { db } from "../firebase.config"
-import { addDoc, collection,serverTimestamp } from "firebase/firestore"
 import { v4 as uuidv4 } from "uuid"
 
 function CreateListing() {
@@ -142,7 +141,7 @@ function CreateListing() {
             })
         }
         
-        const imageUrls = await Promise.all(
+        const imgUrls = await Promise.all(
             [...images].map((image) => storeImage(image))
         ).catch(() => {
             setLoading(false)
@@ -150,23 +149,7 @@ function CreateListing() {
             return
         })
         
-        const formDataCopy = {
-            ...formData,
-            imageUrls,
-            geolocation,
-            timestamp: serverTimestamp(),
-        }
-        
-        delete formDataCopy.images
-        delete formDataCopy.address
-        location && (formDataCopy.location = location)
-        !formDataCopy.offer && delete formDataCopy.discountedPrice
-        
-        const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
-        setLoading(false)
-        toast.success('Listing saved')
-        nav(`/category/${formDataCopy.type}/${docRef.id}`)
-        
+        console.log(imgUrls)
         
         setLoading(false)
 

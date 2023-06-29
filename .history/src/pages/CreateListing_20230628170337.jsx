@@ -142,7 +142,7 @@ function CreateListing() {
             })
         }
         
-        const imageUrls = await Promise.all(
+        const imgUrls = await Promise.all(
             [...images].map((image) => storeImage(image))
         ).catch(() => {
             setLoading(false)
@@ -152,7 +152,6 @@ function CreateListing() {
         
         const formDataCopy = {
             ...formData,
-            imageUrls,
             geolocation,
             timestamp: serverTimestamp(),
         }
@@ -165,7 +164,6 @@ function CreateListing() {
         const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
         setLoading(false)
         toast.success('Listing saved')
-        nav(`/category/${formDataCopy.type}/${docRef.id}`)
         
         
         setLoading(false)

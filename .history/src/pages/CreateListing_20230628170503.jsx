@@ -142,7 +142,7 @@ function CreateListing() {
             })
         }
         
-        const imageUrls = await Promise.all(
+        const imgUrls = await Promise.all(
             [...images].map((image) => storeImage(image))
         ).catch(() => {
             setLoading(false)
@@ -152,7 +152,6 @@ function CreateListing() {
         
         const formDataCopy = {
             ...formData,
-            imageUrls,
             geolocation,
             timestamp: serverTimestamp(),
         }
