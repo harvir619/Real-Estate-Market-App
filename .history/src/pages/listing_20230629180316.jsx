@@ -7,7 +7,7 @@ import Spinner from '../components/Spinner'
 import shareIcon from '../assets/svg/shareIcon.svg'
 
 function Listing() {
-    const [listing, setListing] = useState(null)
+    const [listing, setListing] = useState([])
     const [loading, setLoading] = useState(true)
     const [shareLinkCopied,setShareLinkCopied] = useState(false)
     
@@ -37,10 +37,9 @@ function Listing() {
         
     },[navigate,params.listingId])
 
-    if(loading) {
-        return <Spinner/>
-    }
-   
+    
+    
+    
     return (
         <main>
             {/* Slider */}
@@ -60,10 +59,8 @@ function Listing() {
                 <p className="listingName">{listing.name} - ${
                     listing.offer ?
                         listing.discountedPrice
-                            .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                         : listing.regularPrice
-                            .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                 }</p>
                 <p className="listingLocation">{listing.location}</p>
@@ -90,7 +87,7 @@ function Listing() {
                 {/* MAP */}
                 
                 {auth.currentUser?.uid !== listing.userRef && (
-                    <Link to={`/contact/${listing.userRef}?listingName=${listing.name}`}
+                    <Link to={`/contact/${listing.userRef}?listingName=${listing.name}$listingLocation=${listing.location}`}
                         className="primaryButton">
                         Contact Landlord
                     </Link>

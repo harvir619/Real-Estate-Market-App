@@ -37,10 +37,9 @@ function Listing() {
         
     },[navigate,params.listingId])
 
-    if(loading) {
-        return <Spinner/>
-    }
-   
+    
+    
+    
     return (
         <main>
             {/* Slider */}
@@ -90,7 +89,7 @@ function Listing() {
                 {/* MAP */}
                 
                 {auth.currentUser?.uid !== listing.userRef && (
-                    <Link to={`/contact/${listing.userRef}?listingName=${listing.name}`}
+                    <Link to={`/contact/${listing.userRef}?listingName=${listing.name}$listingLocation=${listing.location}`}
                         className="primaryButton">
                         Contact Landlord
                     </Link>

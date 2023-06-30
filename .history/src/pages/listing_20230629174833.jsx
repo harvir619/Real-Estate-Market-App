@@ -1,13 +1,13 @@
 import { getDoc,doc} from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { db } from '../firebase.config'
 import { getAuth } from 'firebase/auth'
 import Spinner from '../components/Spinner'
 import shareIcon from '../assets/svg/shareIcon.svg'
 
 function Listing() {
-    const [listing, setListing] = useState(null)
+    const [listing, setListing] = useState([])
     const [loading, setLoading] = useState(true)
     const [shareLinkCopied,setShareLinkCopied] = useState(false)
     
@@ -26,7 +26,6 @@ function Listing() {
                     setListing(docSnap.data())
                     setLoading(false)
                 }
-                console.log(docSnap.data())
                 
             } catch (error) {
                 console.log(error)
@@ -37,10 +36,9 @@ function Listing() {
         
     },[navigate,params.listingId])
 
-    if(loading) {
-        return <Spinner/>
-    }
-   
+    
+    
+    
     return (
         <main>
             {/* Slider */}
@@ -80,21 +78,9 @@ function Listing() {
                         {listing.bedrooms>1?`${listing.bedrooms} Bedrooms`:'1 Bedroom'}
                     </li>
                     <li>
-                        {listing.bathrooms>1?`${listing.bathrooms} Bathrooms`:'1 Bathroom'}
+                        {listing.bathrooms>1?`${listing.bathrooms} Bedrooms`:'1 Bedroom'}
                     </li>
-                    <li>{listing.parking && 'Parking Spot'}</li>
-                    <li>{listing.furnished &&'Furnished'}</li>
                 </ul>
-                <p className="listingLocationTitle">Location</p>
-                
-                {/* MAP */}
-                
-                {auth.currentUser?.uid !== listing.userRef && (
-                    <Link to={`/contact/${listing.userRef}?listingName=${listing.name}`}
-                        className="primaryButton">
-                        Contact Landlord
-                    </Link>
-                )}
             </div>
         </main>
     )

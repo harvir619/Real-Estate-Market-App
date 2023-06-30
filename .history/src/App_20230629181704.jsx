@@ -28,7 +28,7 @@ function App() {
           <Route path='/offers' element={<Offers />} />
           <Route path= '/category/:categoryName' element={<Category/>} />
           <Route path='/category/:categoryName/:listingId' element={<Listing />} />
-          <Route path ='/contact/:landlordId' element={<Contact/>} />
+          <Route path ='/contact/:userID/:listingId' element={<Contact/>} />
           <Route path='/sign-in' element={<SignIn />} />
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/create-listing' element={<CreateListing />} />
