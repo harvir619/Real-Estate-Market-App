@@ -78,9 +78,9 @@ function CreateListing() {
             const response = await fetch(GEO_URL)
             
             const data = await response.json()
-             console.log(data.results[0]?.geometry.location)
+            
             geolocation.lat = data.results[0]?.geometry.location.lat??0
-            geolocation.long = data.results[0]?.geometry.location.lng ?? 0
+            geolocation.long = data.results[0]?.geometry.location.long ?? 0
             
             location = data.status =='ZERO_RESULTS'?undefined:data.results[0]?.formatted_address
             
@@ -94,7 +94,7 @@ function CreateListing() {
             geolocation.lat = lat
             geolocation.long = long
         }
-       
+        
         //Store images in firebase
         const storeImage = async (image) => {
             return new Promise((resolve, reject) => {

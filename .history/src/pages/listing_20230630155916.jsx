@@ -9,7 +9,6 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 function Listing() {
     const [listing, setListing] = useState(null)
@@ -31,6 +30,7 @@ function Listing() {
                     setListing(docSnap.data())
                     setLoading(false)
                 }
+                console.log(listing)
                 
             } catch (error) {
                 console.log(error)
@@ -47,20 +47,16 @@ function Listing() {
    
     return (
         <main>
-      <Swiper pagination={true}>
-        {listing?.imageUrls.map((url, index) => (
-          <SwiperSlide key={index}>
-            <div
-              className='swiperSlideDiv'
-              style={{
-                background: `url(${url}) center no-repeat`,
-                backgroundSize: 'cover',
-                height: '300px', // Adjust the height as needed
-              }}
-            ></div>
-          </SwiperSlide>
-        ))}
+            <Swiper slidesPerView={1} pagination ={{ clickable:true }}>
+                {listing.imageUrls.map((url,index) => (
+                    <SwiperSlide key={index}>
+                        <div style={{ background:`url(${listing.imageUrls[index]})` }} className="swiperSlideDiv">
+                            
+                        </div>
+                    </SwiperSlide>
+                ))}
             </Swiper>
+            
             
             <div className="shareIconDiv" onClick={() => {
                 navigator.clipboard.writeText(window.location.href)

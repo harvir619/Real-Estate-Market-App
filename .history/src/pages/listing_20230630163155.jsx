@@ -47,20 +47,21 @@ function Listing() {
    
     return (
         <main>
-      <Swiper pagination={true}>
-        {listing?.imageUrls.map((url, index) => (
-          <SwiperSlide key={index}>
-            <div
-              className='swiperSlideDiv'
-              style={{
-                background: `url(${url}) center no-repeat`,
-                backgroundSize: 'cover',
-                height: '300px', // Adjust the height as needed
-              }}
-            ></div>
-          </SwiperSlide>
-        ))}
-            </Swiper>
+<Swiper slidesPerView={1} navigation pagination={{ clickable: true }}>
+  {listing?.imageUrls.map((url, index) => (
+    <SwiperSlide key={index}>
+      <div
+        style={{
+          background: `url(${url}) center no-repeat`,
+          backgroundSize: 'cover',
+        }}
+        className='swiperSlideDiv'
+      ></div>
+    </SwiperSlide>
+  ))}
+</Swiper>
+
+            
             
             <div className="shareIconDiv" onClick={() => {
                 navigator.clipboard.writeText(window.location.href)

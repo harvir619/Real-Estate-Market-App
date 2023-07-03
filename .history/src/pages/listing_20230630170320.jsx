@@ -47,20 +47,40 @@ function Listing() {
    
     return (
         <main>
-      <Swiper pagination={true}>
+      {/* <Swiper
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}
+      >
         {listing?.imageUrls.map((url, index) => (
           <SwiperSlide key={index}>
             <div
-              className='swiperSlideDiv'
               style={{
                 background: `url(${url}) center no-repeat`,
                 backgroundSize: 'cover',
-                height: '300px', // Adjust the height as needed
               }}
+              className="swiperSlideDiv"
             ></div>
           </SwiperSlide>
         ))}
-            </Swiper>
+      </Swiper> */}
+        <swiper-container pagination="true">
+                {listing?.imageUrls.map((url, index) => (
+                    <SwiperSlide key={index}>
+                        {/* <div className='swiperSlideDiv'  style={{
+                background: `url(${url}) center no-repeat`,
+                backgroundSize: 'cover',
+              }}>  </div> */}
+                        <div>
+                        <img className='swiperSlideDiv' src={url} alt="" />
+                            
+                        </div>
+                            
+                      
+                    </SwiperSlide>
+                    ))}
+        </swiper-container>
+            
             
             <div className="shareIconDiv" onClick={() => {
                 navigator.clipboard.writeText(window.location.href)

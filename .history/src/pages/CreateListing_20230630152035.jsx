@@ -78,9 +78,9 @@ function CreateListing() {
             const response = await fetch(GEO_URL)
             
             const data = await response.json()
-             console.log(data.results[0]?.geometry.location)
+            
             geolocation.lat = data.results[0]?.geometry.location.lat??0
-            geolocation.long = data.results[0]?.geometry.location.lng ?? 0
+            geolocation.long = data.results[0]?.geometry.location.long ?? 0
             
             location = data.status =='ZERO_RESULTS'?undefined:data.results[0]?.formatted_address
             
@@ -94,7 +94,8 @@ function CreateListing() {
             geolocation.lat = lat
             geolocation.long = long
         }
-       
+        
+        console.log(geolocation)
         //Store images in firebase
         const storeImage = async (image) => {
             return new Promise((resolve, reject) => {
@@ -139,30 +140,30 @@ function CreateListing() {
             })
         }
         
-        const imageUrls = await Promise.all(
-            [...images].map((image) => storeImage(image))
-        ).catch(() => {
-            setLoading(false)
-            toast.error('Images not uploaded')
-            return
-        })
-        
-        const formDataCopy = {
-            ...formData,
-            imageUrls,
-            geolocation,
-            timestamp: serverTimestamp(),
-        }
-        
-        formDataCopy.location = address
-        delete formDataCopy.images
-        delete formDataCopy.address
-        !formDataCopy.offer && delete formDataCopy.discountedPrice
-        
-        const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
-        setLoading(false)
-        toast.success('Listing saved')
-        nav(`/category/${formDataCopy.type}/${docRef.id}`)
+        // const imageUrls = await Promise.all(
+        //     [...images].map((image) => storeImage(image))
+        // ).catch(() => {
+        //     setLoading(false)
+        //     toast.error('Images not uploaded')
+        //     return
+        // })
+        // 
+        // const formDataCopy = {
+        //     ...formData,
+        //     imageUrls,
+        //     geolocation,
+        //     timestamp: serverTimestamp(),
+        // }
+        // 
+        // formDataCopy.location = address
+        // delete formDataCopy.images
+        // delete formDataCopy.address
+        // !formDataCopy.offer && delete formDataCopy.discountedPrice
+        // 
+        // const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
+        // setLoading(false)
+        // toast.success('Listing saved')
+        // nav(`/category/${formDataCopy.type}/${docRef.id}`)
         
         
         setLoading(false)

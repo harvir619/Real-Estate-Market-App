@@ -5,11 +5,7 @@ import { db } from '../firebase.config'
 import { getAuth } from 'firebase/auth'
 import Spinner from '../components/Spinner'
 import shareIcon from '../assets/svg/shareIcon.svg'
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/swiper-bundle.css'
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+import { MapContainer, Marker,Popup,TileLayer } from 'react-leaflet'
 
 function Listing() {
     const [listing, setListing] = useState(null)
@@ -31,6 +27,7 @@ function Listing() {
                     setListing(docSnap.data())
                     setLoading(false)
                 }
+                console.log(docSnap.data())
                 
             } catch (error) {
                 console.log(error)
@@ -47,20 +44,7 @@ function Listing() {
    
     return (
         <main>
-      <Swiper pagination={true}>
-        {listing?.imageUrls.map((url, index) => (
-          <SwiperSlide key={index}>
-            <div
-              className='swiperSlideDiv'
-              style={{
-                background: `url(${url}) center no-repeat`,
-                backgroundSize: 'cover',
-                height: '300px', // Adjust the height as needed
-              }}
-            ></div>
-          </SwiperSlide>
-        ))}
-            </Swiper>
+            {/* Slider */}
             
             <div className="shareIconDiv" onClick={() => {
                 navigator.clipboard.writeText(window.location.href)
@@ -106,15 +90,12 @@ function Listing() {
                 
                 <div className="leafletContainer">
                     <MapContainer style={{ height: '100%', width: '100%' }}
-                        center={[listing.geolocation.lat, listing.geolocation.long]}
+                        center={[listing.geolocation.lat, listing.geolocation.lng]}
                     zoom={13} scrollWheelZoom={false}>
                         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/
                             copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
-                        />
-                        <Marker position={[listing.geolocation.lat, listing.geolocation.long]}>
-                            <Popup>{listing.location}</Popup>
-                        </Marker>
+                            />
                     </MapContainer>
                 </div>
                 

@@ -9,12 +9,15 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
+import { register } from 'swiper/element/bundle';
+register();
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 function Listing() {
     const [listing, setListing] = useState(null)
     const [loading, setLoading] = useState(true)
-    const [shareLinkCopied,setShareLinkCopied] = useState(false)
+    const [shareLinkCopied, setShareLinkCopied] = useState(false)
+    const swiperElRef = useRef(null);
     
     const navigate = useNavigate()
     const params = useParams()
@@ -39,6 +42,16 @@ function Listing() {
         
         fetchListing()
         
+        swiperElRef.current.addEventListener('progress', (e) => {
+      const [swiper, progress] = e.detail;
+      console.log(progress);
+    });
+
+    swiperElRef.current.addEventListener('slidechange', (e) => {
+      console.log('slide changed');
+    });
+        
+        
     },[navigate,params.listingId])
 
     if(loading) {
@@ -47,20 +60,37 @@ function Listing() {
    
     return (
         <main>
-      <Swiper pagination={true}>
+      {/* <Swiper
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}
+      >
         {listing?.imageUrls.map((url, index) => (
           <SwiperSlide key={index}>
             <div
-              className='swiperSlideDiv'
               style={{
                 background: `url(${url}) center no-repeat`,
                 backgroundSize: 'cover',
-                height: '300px', // Adjust the height as needed
               }}
+              className="swiperSlideDiv"
             ></div>
           </SwiperSlide>
         ))}
-            </Swiper>
+      </Swiper> */}
+        {/* <swiper-container slides-per-view="3" grid-rows="3" mousewheel-force-to-axis="true">
+                {listing?.imageUrls.map((url, index) => (
+                <SwiperSlide key={index}>
+                    <div
+                    style={{
+                        background: `url(${url}) center no-repeat`,
+                        backgroundSize: 'cover',
+                    }}
+                    className="swiperSlideDiv"
+                    ></div>
+                    </SwiperSlide>
+                    ))}
+        </swiper-container> */}
+            
             
             <div className="shareIconDiv" onClick={() => {
                 navigator.clipboard.writeText(window.location.href)
