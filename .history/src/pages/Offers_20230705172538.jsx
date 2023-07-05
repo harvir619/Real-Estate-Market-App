@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { collection, getDocs,query,where,orderBy,limit,startAfter } from "firebase/firestore"
+import { collection, getDocs,query,where,orderBy,limit } from "firebase/firestore"
 import { db } from "../firebase.config"
 import { toast } from "react-toastify"
 import Spinner from "../components/Spinner"
@@ -28,6 +28,7 @@ function Offers() {
                 
                 //Execute query
                 const querySnap = await getDocs(q)
+                
                 const lastVisible = querySnap.docs[querySnap.docs.length - 1]
                 setLastFetchedListing(lastVisible)
                 
@@ -47,7 +48,7 @@ function Offers() {
         
     },[])
     
-            const onFetchMoreListing = async () => {
+            const fetchListings = async () => {
             try {
                 //Get reference
                 const listingsRef = collection(db, 'listings')
@@ -74,7 +75,6 @@ function Offers() {
                 setListings((prevState)=>[...prevState,...listings])
                 setLoading(false)
             } catch (error) {
-                console.log(error)
                 toast.error('Could not fetch listings')
             }
         }

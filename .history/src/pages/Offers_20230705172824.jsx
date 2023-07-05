@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { collection, getDocs,query,where,orderBy,limit,startAfter } from "firebase/firestore"
+import { collection, getDocs,query,where,orderBy,limit } from "firebase/firestore"
 import { db } from "../firebase.config"
 import { toast } from "react-toastify"
 import Spinner from "../components/Spinner"
@@ -24,10 +24,11 @@ function Offers() {
                 const q = query(listingsRef,
                     where('offer', '==', true),
                     orderBy('timestamp', 'desc'),
-                    limit(3))
+                    limit(2))
                 
                 //Execute query
                 const querySnap = await getDocs(q)
+                
                 const lastVisible = querySnap.docs[querySnap.docs.length - 1]
                 setLastFetchedListing(lastVisible)
                 

@@ -53,7 +53,7 @@ function Profile() {
     if (window.confirm('Are you sure you want to delete?')) {
       try {
         
-        const ref = doc(db, 'listings', listingId)
+        const ref = doc(db, 'listings', 'listingId')
         
         await deleteDoc(ref)
         const updatedListings = listings.filter((listing) => listing.id !== listingId)

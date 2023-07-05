@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom"
 import ListingItem from "../components/ListingItem"
 
 
-function Offers() {
+function Category() {
     const [listings, setListings] = useState(null)
     const [loading, setLoading] = useState(true)
     const [lastFetchedListing, setLastFetchedListing] = useState(null)
@@ -22,14 +22,12 @@ function Offers() {
                 
                 //Create a query
                 const q = query(listingsRef,
-                    where('offer', '==', true),
+                    where('type', '==', params.categoryName),
                     orderBy('timestamp', 'desc'),
-                    limit(3))
+                    limit(10))
                 
                 //Execute query
                 const querySnap = await getDocs(q)
-                const lastVisible = querySnap.docs[querySnap.docs.length - 1]
-                setLastFetchedListing(lastVisible)
                 
                 const listings = []
                 
@@ -45,48 +43,15 @@ function Offers() {
         }
         fetchListings()
         
-    },[])
-    
-            const onFetchMoreListing = async () => {
-            try {
-                //Get reference
-                const listingsRef = collection(db, 'listings')
-                
-                //Create a query
-                const q = query(listingsRef,
-                    where('offer', '==', true),
-                    orderBy('timestamp', 'desc'),
-                     startAfter(lastFetchedListing),
-                    limit(3))
-                
-                //Execute query
-                const querySnap = await getDocs(q)
-                
-                const lastVisible = querySnap.docs[querySnap.docs.length - 1]
-                setLastFetchedListing(lastVisible)
-                
-                const listings = []
-                
-                querySnap.forEach((doc) => {
-                    return listings.push({id: doc.id, data: doc.data()})
-                })
-                
-                setListings((prevState)=>[...prevState,...listings])
-                setLoading(false)
-            } catch (error) {
-                console.log(error)
-                toast.error('Could not fetch listings')
-            }
-        }
-    
+    },[params.categoryName])
     
     return (
         <div className="category">
             
             <header>
-          <p className="pageHeader">
-            Offers
-          </p>
+                <p className="pageHeader">
+                    {params.categoryName === 'rent' ? 'Places for Rent' : 'Places for Sale'}
+                </p>
             </header>
             
             {loading ? <Spinner /> : listings && listings.length > 0 ? (
@@ -100,15 +65,10 @@ function Offers() {
                             )}
                         </ul>
                     </main>
-                    <br />
-                    <br />
-                    {lastFetchedListing && (
-                        <p className="loadMore" onClick={onFetchMoreListing}>Load More</p>
-                    )}                    
                 </>
-            ):<p>No Offers</p>}    
+            ):<p>No Listing for {params.categoryName}</p>}    
         </div>
   )
 }
 
-export default Offers
+export default Category

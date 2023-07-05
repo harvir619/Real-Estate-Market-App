@@ -48,29 +48,6 @@ function Profile() {
     }))
   }
   
-  const onDelete = async (listingId) => {
-    
-    if (window.confirm('Are you sure you want to delete?')) {
-      try {
-        
-        const ref = doc(db, 'listings', listingId)
-        
-        await deleteDoc(ref)
-        const updatedListings = listings.filter((listing) => listing.id !== listingId)
-        setListings(updatedListings)
-        toast.success('Successfully deleted listing')
-      
-  
-
-      }
-        
-       catch (error) {
-        console.log(error)
-      }
-      
-    }
-  }
-  
   useEffect(() => {
     
     const fetchListings = async () => {
@@ -97,7 +74,7 @@ function Profile() {
     fetchListings()
   },[auth.currentUser.uid])
   
-
+  console.log(listings)
   
   return <div className="profile">
     <header className="profileHeader">
@@ -149,7 +126,7 @@ function Profile() {
           <p className="listingText">Your Listings</p>
           <ul className="listingList">
             {listings.map((listing) => (
-              <ListingItem key={listing.id} listing={listing.data} id={listing.id} onDelete={()=>onDelete(listing.id)}/>
+              <ListingItem key={listing.id} listing={listing.data}/>
             ))}
           </ul>
         </>

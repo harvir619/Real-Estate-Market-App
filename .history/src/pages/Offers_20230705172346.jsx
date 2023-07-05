@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { collection, getDocs,query,where,orderBy,limit,startAfter } from "firebase/firestore"
+import { collection, getDocs,query,where,orderBy,limit } from "firebase/firestore"
 import { db } from "../firebase.config"
 import { toast } from "react-toastify"
 import Spinner from "../components/Spinner"
@@ -24,10 +24,11 @@ function Offers() {
                 const q = query(listingsRef,
                     where('offer', '==', true),
                     orderBy('timestamp', 'desc'),
-                    limit(3))
+                    limit(10))
                 
                 //Execute query
                 const querySnap = await getDocs(q)
+                
                 const lastVisible = querySnap.docs[querySnap.docs.length - 1]
                 setLastFetchedListing(lastVisible)
                 
@@ -47,7 +48,7 @@ function Offers() {
         
     },[])
     
-            const onFetchMoreListing = async () => {
+            const fetchListings = async () => {
             try {
                 //Get reference
                 const listingsRef = collection(db, 'listings')
@@ -56,8 +57,7 @@ function Offers() {
                 const q = query(listingsRef,
                     where('offer', '==', true),
                     orderBy('timestamp', 'desc'),
-                     startAfter(lastFetchedListing),
-                    limit(3))
+                    limit(10))
                 
                 //Execute query
                 const querySnap = await getDocs(q)
@@ -71,10 +71,9 @@ function Offers() {
                     return listings.push({id: doc.id, data: doc.data()})
                 })
                 
-                setListings((prevState)=>[...prevState,...listings])
+                setListings(listings)
                 setLoading(false)
             } catch (error) {
-                console.log(error)
                 toast.error('Could not fetch listings')
             }
         }
@@ -100,11 +99,6 @@ function Offers() {
                             )}
                         </ul>
                     </main>
-                    <br />
-                    <br />
-                    {lastFetchedListing && (
-                        <p className="loadMore" onClick={onFetchMoreListing}>Load More</p>
-                    )}                    
                 </>
             ):<p>No Offers</p>}    
         </div>

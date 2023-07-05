@@ -50,24 +50,14 @@ function Profile() {
   
   const onDelete = async (listingId) => {
     
-    if (window.confirm('Are you sure you want to delete?')) {
-      try {
-        
-        const ref = doc(db, 'listings', listingId)
-        
-        await deleteDoc(ref)
-        const updatedListings = listings.filter((listing) => listing.id !== listingId)
-        setListings(updatedListings)
-        toast.success('Successfully deleted listing')
+    try {
       
-  
-
-      }
-        
-       catch (error) {
-        console.log(error)
-      }
+      const ref = doc(db, 'listings', 'listingId')
       
+      console.log(ref)
+      
+    } catch (error) {
+      console.log(error)
     }
   }
   
@@ -97,7 +87,7 @@ function Profile() {
     fetchListings()
   },[auth.currentUser.uid])
   
-
+  console.log(listings)
   
   return <div className="profile">
     <header className="profileHeader">
