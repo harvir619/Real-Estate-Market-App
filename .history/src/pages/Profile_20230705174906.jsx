@@ -154,7 +154,7 @@ function Profile() {
                 listing={listing.data}
                 id={listing.id}
                 onDelete={() => onDelete(listing.id)}
-                onEdit={()=>{navigate(`/edit-listing/${listing.id}`)}}
+                onEdit={()=>onEdit(listing.id)}
               />
             ))}
           </ul>
